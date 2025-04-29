@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ucp1_flutter_20220140101/Presentation/detail_data_pelanggan.dart';
+
 
 class DataPelangganPage extends StatefulWidget {
   const DataPelangganPage({super.key});
@@ -19,9 +21,18 @@ class _DataPelangganPageState extends State<DataPelangganPage> {
 
   void _simpan() {
     if (_formKey.currentState!.validate()) {
-      // Lakukan penyimpanan data
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Data berhasil disimpan')),
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DetailPelangganPage(
+            nama: _namaController.text,
+            email: _emailController.text,
+            noHp: _noHpController.text,
+            alamat: _alamatController.text,
+            provinsi: _provinsiController.text,
+            kodePos: _kodePosController.text,
+          ),
+        ),
       );
     }
   }
