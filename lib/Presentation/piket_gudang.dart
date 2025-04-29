@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ucp1_flutter_20220140101/Presentation/detail_tugas_piket.dart';
 
 class PiketGudangPage extends StatefulWidget {
   const PiketGudangPage({super.key});
@@ -23,7 +24,8 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
     );
     if (picked != null) {
       setState(() {
-        _tanggalController.text = "${picked.day}/${picked.month}/${picked.year}";
+        _tanggalController.text =
+            "${picked.day}/${picked.month}/${picked.year}";
       });
     }
   }
@@ -38,7 +40,7 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
           'tanggal': _tanggalController.text,
           'tugas': _tugasController.text,
         });
-        _tugasController.clear(); // opsional, untuk reset tugas input
+        _tugasController.clear(); // reset input tugas
       });
     }
   }
@@ -71,7 +73,8 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
               controller: _namaController,
               decoration: InputDecoration(
                 hintText: 'Isi Nama Anggota',
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12)),
               ),
             ),
             const SizedBox(height: 16),
@@ -83,7 +86,8 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
               decoration: InputDecoration(
                 hintText: 'Pilih Tanggal',
                 prefixIcon: const Icon(Icons.calendar_today),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12)),
               ),
               onTap: () => _selectDate(context),
             ),
@@ -97,7 +101,8 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
                     controller: _tugasController,
                     decoration: InputDecoration(
                       hintText: 'Tugas Piket',
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12)),
                     ),
                   ),
                 ),
@@ -106,7 +111,8 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
                   onPressed: _tambahTugas,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.orange,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
                   ),
                   child: const Text('Tambah'),
                 )
@@ -119,7 +125,6 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
             ),
             const SizedBox(height: 12),
 
-            // Tampilkan daftar tugas
             Expanded(
               child: _daftarTugas.isEmpty
                   ? const Center(child: Text('Belum ada Data'))
@@ -132,12 +137,54 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
                           child: ListTile(
                             leading: const Icon(Icons.assignment),
                             title: Text(tugas['tugas']!),
-                            subtitle: Text('${tugas['nama']} - ${tugas['tanggal']}'),
+                            subtitle:
+                                Text('${tugas['nama']} - ${tugas['tanggal']}'),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      DetailTugasPiketPage(tugas: tugas),
+                                ),
+                              );
+                            },
                           ),
                         );
                       },
                     ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// =========================
+// Tambahkan ini di file yang sama atau file terpisah
+class DetailTugasPage extends StatelessWidget {
+  final Map<String, String> tugas;
+
+  const DetailTugasPage({super.key, required this.tugas});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Detail Tugas'),
+        backgroundColor: Colors.orange,
+        foregroundColor: Colors.white,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Nama: ${tugas['nama']}', style: const TextStyle(fontSize: 18)),
+            const SizedBox(height: 8),
+            Text('Tanggal: ${tugas['tanggal']}', style: const TextStyle(fontSize: 18)),
+            const SizedBox(height: 8),
+            Text('Tugas: ${tugas['tugas']}', style: const TextStyle(fontSize: 18)),
           ],
         ),
       ),
