@@ -55,6 +55,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(height: 4),
                 TextFormField(
                   controller: nameController,
+                  validator: (value){
+                     if (value == null || value.isEmpty) {
+                      return 'Nama lengkap tidak boleh kosong';
+                      }
+                      return null;
+                  },
+
                   decoration: InputDecoration(
                     hintText: 'Nama Lengkap',
                     prefixIcon: const Icon(Icons.person),
