@@ -12,9 +12,9 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            // 🔸 Bagian Profil Header
+            // 🔸 Bagian Profil Header (ganti ke merah)
             Container(
-              color: Colors.orange,
+              color: Colors.red,
               padding: const EdgeInsets.all(16),
               child: Row(
                 children: [
@@ -79,6 +79,7 @@ class HomePage extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => const PiketGudangPage()),
                       );
                     },
+                    color: Colors.red,
                   ),
                   _menuButton(
                     icon: Icons.people,
@@ -86,6 +87,7 @@ class HomePage extends StatelessWidget {
                     onTap: () {
                       // Navigasi ke halaman Data Pelanggan
                     },
+                    color: Colors.blue,
                   ),
                   _menuButton(
                     icon: Icons.inventory_2,
@@ -94,6 +96,7 @@ class HomePage extends StatelessWidget {
                       // Navigasi ke halaman Barang Masuk/Keluar
                     },
                     isFullWidth: true,
+                    color: Colors.red,
                   ),
                 ],
               ),
@@ -108,6 +111,7 @@ class HomePage extends StatelessWidget {
     required IconData icon,
     required String label,
     required VoidCallback onTap,
+    required Color color,
     bool isFullWidth = false,
   }) {
     return GestureDetector(
@@ -115,7 +119,7 @@ class HomePage extends StatelessWidget {
       child: Container(
         width: isFullWidth ? double.infinity : null,
         decoration: BoxDecoration(
-          color: Colors.orange,
+          color: color,
           borderRadius: BorderRadius.circular(16),
         ),
         padding: const EdgeInsets.all(16),
