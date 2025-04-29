@@ -97,6 +97,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     Expanded(
                       child: TextFormField(
                         controller: phoneController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'No HP tidak boleh kosong';
+                          }
+                          return null;
+                        },
                         decoration: InputDecoration(
                           hintText: 'No HP',
                           prefixIcon: const Icon(Icons.phone),
