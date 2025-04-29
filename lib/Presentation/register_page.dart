@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ucp1_flutter_20220140101/Presentation/home_page.dart';
 import 'package:ucp1_flutter_20220140101/Presentation/login_page.dart';
 
 
@@ -197,7 +198,13 @@ class _RegisterPageState extends State<RegisterPage> {
                           );
                           return;
                         }
-
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HomePage(),
+                              ),
+                          );
+  
                         // Proses registrasi jika valid
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
