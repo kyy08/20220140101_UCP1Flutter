@@ -50,7 +50,13 @@ class HomePage extends StatelessWidget {
               ),
             ),
 
-            // 🔸 Iklan atau banner (jika ingin ditambah, bisa letakkan di sini)
+            // 🔸 Banner Gambar
+            Image.asset(
+              'assets/images/banner.jpg', // Pastikan file ini ada dan sesuai
+              width: double.infinity,
+              height: 150,
+              fit: BoxFit.cover,
+            ),
 
             // 🔸 Menu Grid
             Expanded(
