@@ -10,7 +10,7 @@ class DetailTugasPiketPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Detail Tugas'),
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.blue, // 🔵 Warna biru
         foregroundColor: Colors.white,
       ),
       body: Padding(
@@ -18,13 +18,13 @@ class DetailTugasPiketPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Nama Anggota:', style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text('Nama Anggota:', style: TextStyle(fontWeight: FontWeight.bold)),
             Text(tugas['nama'] ?? '-'),
-            SizedBox(height: 16),
-            Text('Tanggal:', style: TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 16),
+            const Text('Tanggal:', style: TextStyle(fontWeight: FontWeight.bold)),
             Text(tugas['tanggal'] ?? '-'),
-            SizedBox(height: 16),
-            Text('Tugas:', style: TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 16),
+            const Text('Tugas:', style: TextStyle(fontWeight: FontWeight.bold)),
             Text(tugas['tugas'] ?? '-'),
           ],
         ),

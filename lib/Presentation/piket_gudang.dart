@@ -54,7 +54,7 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.blue, // 🔵 Warna biru
         title: const Text('Piket Gudang'),
         foregroundColor: Colors.white,
       ),
@@ -111,7 +111,7 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
                   ElevatedButton(
                     onPressed: _tambahTugas,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange,
+                      backgroundColor: Colors.blue, // 🔵 Warna biru
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12)),
                     ),
@@ -125,7 +125,6 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
-
               Expanded(
                 child: _daftarTugas.isEmpty
                     ? const Center(child: Text('Belum ada Data'))
