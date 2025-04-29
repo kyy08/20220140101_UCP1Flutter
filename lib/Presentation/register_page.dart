@@ -153,6 +153,12 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: TextFormField(
                         controller: confirmPasswordController,
                         obscureText: _obscureConfirmPassword,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Konfirmasi password tidak boleh kosong';
+                          }
+                          return null;
+                        },
                         decoration: InputDecoration(
                           hintText: 'Konfirmasi Password',
                           prefixIcon: const Icon(Icons.lock_outline),
