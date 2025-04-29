@@ -1,7 +1,40 @@
 import 'package:flutter/material.dart';
 
-class DataPelangganPage extends StatelessWidget {
+class DataPelangganPage extends StatefulWidget {
   const DataPelangganPage({super.key});
+
+  @override
+  State<DataPelangganPage> createState() => _DataPelangganPageState();
+}
+
+class _DataPelangganPageState extends State<DataPelangganPage> {
+  final _formKey = GlobalKey<FormState>();
+
+  final _namaController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _noHpController = TextEditingController();
+  final _alamatController = TextEditingController();
+  final _provinsiController = TextEditingController();
+  final _kodePosController = TextEditingController();
+
+  void _simpan() {
+    if (_formKey.currentState!.validate()) {
+      // Lakukan penyimpanan data
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Data berhasil disimpan')),
+      );
+    }
+  }
+
+  void _reset() {
+    _formKey.currentState?.reset();
+    _namaController.clear();
+    _emailController.clear();
+    _noHpController.clear();
+    _alamatController.clear();
+    _provinsiController.clear();
+    _kodePosController.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,61 +50,64 @@ class DataPelangganPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildLabel("Nama Cust"),
-              _buildTextField("Nama Cust"),
-              const SizedBox(height: 12),
+        child: Form(
+          key: _formKey,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildLabel("Nama Cust"),
+                _buildTextField("Nama Cust", _namaController),
+                const SizedBox(height: 12),
 
-              Row(
-                children: [
-                  Expanded(child: _buildLabeledField("Email", "Email")),
-                  const SizedBox(width: 12),
-                  Expanded(child: _buildLabeledField("No Hp", "No Hp")),
-                ],
-              ),
-              const SizedBox(height: 12),
-
-              _buildLabel("Alamat"),
-              _buildTextField("Alamat"),
-              const SizedBox(height: 12),
-
-              Row(
-                children: [
-                  Expanded(child: _buildLabeledField("Provinsi", "Provinsi")),
-                  const SizedBox(width: 12),
-                  Expanded(child: _buildLabeledField("Kode Pos", "Kode Pos")),
-                ],
-              ),
-              const SizedBox(height: 24),
-
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  minimumSize: const Size.fromHeight(50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
+                Row(
+                  children: [
+                    Expanded(child: _buildLabeledField("Email", "Email", _emailController)),
+                    const SizedBox(width: 12),
+                    Expanded(child: _buildLabeledField("No Hp", "No Hp", _noHpController)),
+                  ],
                 ),
-                child: const Text('Simpan'),
-              ),
-              const SizedBox(height: 12),
-              OutlinedButton(
-                onPressed: () {},
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: Colors.red,
-                  side: const BorderSide(color: Colors.red),
-                  minimumSize: const Size.fromHeight(50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
+                const SizedBox(height: 12),
+
+                _buildLabel("Alamat"),
+                _buildTextField("Alamat", _alamatController),
+                const SizedBox(height: 12),
+
+                Row(
+                  children: [
+                    Expanded(child: _buildLabeledField("Provinsi", "Provinsi", _provinsiController)),
+                    const SizedBox(width: 12),
+                    Expanded(child: _buildLabeledField("Kode Pos", "Kode Pos", _kodePosController)),
+                  ],
                 ),
-                child: const Text('Reset'),
-              ),
-            ],
+                const SizedBox(height: 24),
+
+                ElevatedButton(
+                  onPressed: _simpan,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    minimumSize: const Size.fromHeight(50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                  child: const Text('Simpan'),
+                ),
+                const SizedBox(height: 12),
+                OutlinedButton(
+                  onPressed: _reset,
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.red,
+                    side: const BorderSide(color: Colors.red),
+                    minimumSize: const Size.fromHeight(50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                  child: const Text('Reset'),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -85,24 +121,26 @@ class DataPelangganPage extends StatelessWidget {
     );
   }
 
-  Widget _buildTextField(String hint) {
-    return TextField(
+  Widget _buildTextField(String hint, TextEditingController controller) {
+    return TextFormField(
+      controller: controller,
       decoration: InputDecoration(
         hintText: hint,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
         filled: true,
         fillColor: Colors.white,
       ),
+      validator: (value) => value == null || value.isEmpty ? 'Tidak boleh kosong' : null,
     );
   }
 
-  Widget _buildLabeledField(String label, String hint) {
+  Widget _buildLabeledField(String label, String hint, TextEditingController controller) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildLabel(label),
         const SizedBox(height: 4),
-        _buildTextField(hint),
+        _buildTextField(hint, controller),
       ],
     );
   }
