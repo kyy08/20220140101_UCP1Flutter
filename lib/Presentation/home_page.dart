@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ucp1_flutter_20220140101/Presentation/data_pelanggan.dart';
 import 'package:ucp1_flutter_20220140101/Presentation/piket_gudang.dart';
 import 'package:ucp1_flutter_20220140101/Presentation/login_page.dart'; 
 
@@ -85,9 +86,13 @@ class HomePage extends StatelessWidget {
                     icon: Icons.people,
                     label: 'Data Pelanggan',
                     onTap: () {
-                      // Navigasi ke halaman Data Pelanggan
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const DataPelangganPage()),
+                      );
                     },
                     color: Colors.blue,
+
                   ),
                   _menuButton(
                     icon: Icons.inventory_2,
