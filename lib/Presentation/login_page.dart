@@ -28,7 +28,13 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 children: [
                   const SizedBox(height: 40),
-                  const Icon(Icons.arrow_drop_up, size: 100, color: Colors.black),
+
+                  // Gambar Logo
+                  Image.asset(
+                    'assets/images/logo.jpeg', 
+                    height: 120,
+                  ),
+
                   const SizedBox(height: 20),
                   const Text(
                     'SELAMAT DATANG KEMBALI',
@@ -39,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   const SizedBox(height: 40),
-                  
+
                   Align(
                     alignment: Alignment.centerLeft,
                     child: const Text(
@@ -97,7 +103,6 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 40),
 
-                  // Tombol Login
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -127,7 +132,6 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 24),
 
-                  // Navigasi ke Register
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
