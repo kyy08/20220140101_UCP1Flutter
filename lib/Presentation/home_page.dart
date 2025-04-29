@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ucp1_flutter_20220140101/Presentation/barang_page.dart';
 import 'package:ucp1_flutter_20220140101/Presentation/data_pelanggan.dart';
 import 'package:ucp1_flutter_20220140101/Presentation/piket_gudang.dart';
 import 'package:ucp1_flutter_20220140101/Presentation/login_page.dart'; 
@@ -98,7 +99,10 @@ class HomePage extends StatelessWidget {
                     icon: Icons.inventory_2,
                     label: 'Barang Masuk/Keluar',
                     onTap: () {
-                      // Navigasi ke halaman Barang Masuk/Keluar
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => BarangPage()),
+                      );
                     },
                     isFullWidth: true,
                     color: Colors.red,
