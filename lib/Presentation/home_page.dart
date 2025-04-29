@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ucp1_flutter_20220140101/Presentation/piket_gudang.dart';
+import 'package:ucp1_flutter_20220140101/Presentation/login_page.dart'; 
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -19,7 +20,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 24,
-                    backgroundImage: AssetImage('assets/images/Profile.jpg'), // ⬅️ Ganti path sesuai lokasi Anda
+                    backgroundImage: AssetImage('assets/images/Profile.jpg'),
                   ),
                   const SizedBox(width: 12),
                   const Column(
@@ -43,7 +44,10 @@ class HomePage extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.logout, color: Colors.white),
                     onPressed: () {
-                      // Aksi logout
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const LoginPage()),
+                      );
                     },
                   ),
                 ],
@@ -52,7 +56,7 @@ class HomePage extends StatelessWidget {
 
             // 🔸 Banner Gambar
             Image.asset(
-              'assets/images/banner.jpg', // Pastikan file ini ada dan sesuai
+              'assets/images/banner.jpg',
               width: double.infinity,
               height: 150,
               fit: BoxFit.cover,
@@ -80,14 +84,14 @@ class HomePage extends StatelessWidget {
                     icon: Icons.people,
                     label: 'Data Pelanggan',
                     onTap: () {
-                      // Arahkan ke halaman Data Pelanggan
+                      // Navigasi ke halaman Data Pelanggan
                     },
                   ),
                   _menuButton(
                     icon: Icons.inventory_2,
                     label: 'Barang Masuk/Keluar',
                     onTap: () {
-                      // Arahkan ke halaman Barang Masuk/Keluar
+                      // Navigasi ke halaman Barang Masuk/Keluar
                     },
                     isFullWidth: true,
                   ),
