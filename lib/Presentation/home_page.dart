@@ -11,17 +11,48 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            // Header with only "Selamat Datang"
+            // 🔸 Bagian Profil Header
             Container(
               color: Colors.orange,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: const Text(
-                'Dashboard',
-                style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 24,
+                    backgroundImage: AssetImage('assets/images/Profile.jpg'), // ⬅️ Ganti path sesuai lokasi Anda
+                  ),
+                  const SizedBox(width: 12),
+                  const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Selamat Datang',
+                        style: TextStyle(color: Colors.white, fontSize: 14),
+                      ),
+                      Text(
+                        'Admin',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  IconButton(
+                    icon: const Icon(Icons.logout, color: Colors.white),
+                    onPressed: () {
+                      // Aksi logout
+                    },
+                  ),
+                ],
               ),
             ),
 
-            // Menu
+            // 🔸 Iklan atau banner (jika ingin ditambah, bisa letakkan di sini)
+
+            // 🔸 Menu Grid
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
@@ -33,9 +64,10 @@ class HomePage extends StatelessWidget {
                     icon: Icons.group,
                     label: 'Data Piket',
                     onTap: () {
-                      Navigator.push(context,MaterialPageRoute(builder: (context)=> const PiketGudangPage() ),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const PiketGudangPage()),
                       );
-
                     },
                   ),
                   _menuButton(
