@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ucp1_flutter_20220140101/Presentation/home_page.dart';
 import 'package:ucp1_flutter_20220140101/Presentation/login_page.dart';
-import 'package:ucp1_flutter_20220140101/Presentation/order_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +20,6 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login': (context) => const LoginPage(),
         '/home': (context) => const HomePage(),
-        //'/order': (context) => const OrderPage(),
       },
     );
   }
