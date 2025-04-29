@@ -9,6 +9,10 @@ class PiketGudangPage extends StatefulWidget {
 
 class _PiketGudangPageState extends State<PiketGudangPage> {
   final TextEditingController _tanggalController = TextEditingController();
+  final TextEditingController _namaController = TextEditingController();
+  final TextEditingController _tugasController = TextEditingController();
+
+  final List<Map<String, String>> _daftarTugas = [];
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -24,9 +28,26 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
     }
   }
 
+  void _tambahTugas() {
+    if (_namaController.text.isNotEmpty &&
+        _tanggalController.text.isNotEmpty &&
+        _tugasController.text.isNotEmpty) {
+      setState(() {
+        _daftarTugas.add({
+          'nama': _namaController.text,
+          'tanggal': _tanggalController.text,
+          'tugas': _tugasController.text,
+        });
+        _tugasController.clear(); // opsional, untuk reset tugas input
+      });
+    }
+  }
+
   @override
   void dispose() {
     _tanggalController.dispose();
+    _namaController.dispose();
+    _tugasController.dispose();
     super.dispose();
   }
 
@@ -47,6 +68,7 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
             const Text('Nama Anggota'),
             const SizedBox(height: 8),
             TextField(
+              controller: _namaController,
               decoration: InputDecoration(
                 hintText: 'Isi Nama Anggota',
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
@@ -72,6 +94,7 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
               children: [
                 Expanded(
                   child: TextField(
+                    controller: _tugasController,
                     decoration: InputDecoration(
                       hintText: 'Tugas Piket',
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
@@ -80,9 +103,7 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
                 ),
                 const SizedBox(width: 8),
                 ElevatedButton(
-                  onPressed: () {
-                    // fungsi tambah
-                  },
+                  onPressed: _tambahTugas,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.orange,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -97,9 +118,26 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
-            const Center(
-              child: Text('Belum ada Data'),
-            )
+
+            // Tampilkan daftar tugas
+            Expanded(
+              child: _daftarTugas.isEmpty
+                  ? const Center(child: Text('Belum ada Data'))
+                  : ListView.builder(
+                      itemCount: _daftarTugas.length,
+                      itemBuilder: (context, index) {
+                        final tugas = _daftarTugas[index];
+                        return Card(
+                          margin: const EdgeInsets.symmetric(vertical: 4),
+                          child: ListTile(
+                            leading: const Icon(Icons.assignment),
+                            title: Text(tugas['tugas']!),
+                            subtitle: Text('${tugas['nama']} - ${tugas['tanggal']}'),
+                          ),
+                        );
+                      },
+                    ),
+            ),
           ],
         ),
       ),
